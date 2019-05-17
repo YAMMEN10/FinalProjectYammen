@@ -48,7 +48,6 @@ public class $_Client {
     public static DataOutputStream getDataOutputStreamMessage() {
         return dataOutputStreamMessage;
     }
-
     public static void setDataOutputStreamMessage(DataOutputStream dataOutputStreamMessage) {
         $_Client.dataOutputStreamMessage = dataOutputStreamMessage;
     }
@@ -72,7 +71,6 @@ public class $_Client {
     public static $_SharedPreferences getSharedPreferences() {
         return sharedPreferences;
     }
-
     public static void setSharedPreferences($_SharedPreferences sharedPreferences) {
         $_Client.sharedPreferences = sharedPreferences;
     }

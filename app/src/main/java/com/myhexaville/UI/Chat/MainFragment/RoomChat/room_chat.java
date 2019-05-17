@@ -33,6 +33,7 @@ import com.myhexaville.login.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -191,7 +192,7 @@ public class room_chat extends Fragment {
                 final JSONObject jsonObject = new JSONObject();
                 try {
                     jsonObject.put($_JSONAttributes.Id.toString(), $_Client.getEmail());
-                    jsonObject.put($_JSONAttributes.IdRecive.toString(), "a@a.a");
+                    jsonObject.put($_JSONAttributes.IdRecive.toString(), "y@y.y");
                     jsonObject.put($_JSONAttributes.Type.toString(), "Message_Text");
                     jsonObject.put("Time", $_Static_Class.getCurrentDate());
                     jsonObject.put($_JSONAttributes.User_Name.toString(), $_Client.getUserName());
@@ -285,7 +286,7 @@ public class room_chat extends Fragment {
 
                 final JSONObject jsonObject = new JSONObject();
                 jsonObject.put($_JSONAttributes.Id.toString(), $_Client.getEmail());
-                jsonObject.put($_JSONAttributes.IdRecive.toString(), "a@a.a");
+                jsonObject.put($_JSONAttributes.IdRecive.toString(), "y@y.y");
                 jsonObject.put($_JSONAttributes.Type.toString(), "Message_Image");
                 jsonObject.put("Time", $_Static_Class.getCurrentDate());
                 jsonObject.put($_JSONAttributes.User_Name.toString(), $_Client.getUserName());
@@ -299,8 +300,8 @@ public class room_chat extends Fragment {
                     public void run() {
                         try {
                             $_Client.getDataOutputStreamMessage().writeUTF(jsonObject.toString());
-                            $_Client.getDataOutputStreamMessage().flush();
                             $_Client.getDataOutputStreamMessage().write(bytes);
+                            $_Client.getDataOutputStreamMessage().flush();
                             System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA = " + bytes);
                         } catch (IOException e) {
                             e.printStackTrace();

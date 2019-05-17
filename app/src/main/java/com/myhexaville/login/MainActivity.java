@@ -21,6 +21,8 @@ import com.myhexaville.Logic.JSONData.$_JSON;
 import com.myhexaville.Logic.JSONData.$_JSONAttributes;
 import com.myhexaville.Logic.JSONData.$_JSON_Accept_Friend_Respons;
 import com.myhexaville.Logic.JSONData.$_JSON_Add_Friend_Response;
+import com.myhexaville.Logic.JSONData.$_JSON_Change_Image;
+import com.myhexaville.Logic.JSONData.$_JSON_Change_Image_Successful;
 import com.myhexaville.Logic.JSONData.$_JSON_Friend_Accept_Response;
 import com.myhexaville.Logic.JSONData.$_JSON_Friend_Refusal_Request;
 import com.myhexaville.Logic.JSONData.$_JSON_Friend_Remove;
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
         main_chat_fragment.OnFragmentInteractionListener,
         room_chat.OnFragmentInteractionListener,
         search_fragment.OnFragmentInteractionListener,
-        notification_fragment.OnFragmentInteractionListener{
+        notification_fragment.OnFragmentInteractionListener {
 
 
     private static final String TAG = "MainActivity";
@@ -104,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
         signup_fragment topSignUpFragment = new signup_fragment();
 
 
-
         binding.loginFragment.setRotation(-90);
 
         binding.button.setOnSignUpListener(topSignUpFragment);
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
 
         binding.button.setOnButtonSwitched(isLogin -> {
             binding.getRoot()
-                    .setBackgroundResource( R.drawable.loginbackground);
+                    .setBackgroundResource(R.drawable.loginbackground);
         });
 
         binding.loginFragment.setVisibility(INVISIBLE);
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
         if (findViewById(R.id.container_main) != null) {
             if (savedInstanceState != null) return;
             if ($_Client.getSharedPreferences().isExist("data_signup") == "") {
-              //  fragmentTransaction.add(R.id.continer_main, new signin_fragment(), null).addToBackStack(null).commit();
+                //  fragmentTransaction.add(R.id.continer_main, new signin_fragment(), null).addToBackStack(null).commit();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.login_fragment, topLoginFragment)
                         .replace(R.id.sign_up_fragment, topSignUpFragment)
@@ -158,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
     }
 
 
-
     public static void get_Recive_Data_And_Apply() {
         new Thread(new Runnable() {
             @Override
@@ -179,12 +179,12 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
         JSONObject jsonObject = null;
         $_JSON my_json = null;
         try {
-            if(checkReciveData.getResult() instanceof  String)
+            if (checkReciveData.getResult() instanceof String)
                 jsonObject = new JSONObject((String) checkReciveData.getResult());
             else {
                 byte[] bytes = new byte[100];
                 $_Client.getDataInputStreamMessage().read(bytes);
-                System.out.println("BITMAP = " +  bytes);
+                System.out.println("BITMAP = " + bytes);
 
             }
             switch (jsonObject.getString("Type")) {
@@ -203,11 +203,11 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
                                 main_fragment.setArguments(bundle);
                                 main_fragment.setArguments(bundle);
                                 fragmentTransaction.replace(R.id.continer_main, main_fragment).commit();*/
-                              Bundle bundle = new Bundle();
-                              bundle.putString("fragment", "main_fragment");
-                              Intent intent = new Intent(MainActivity.context,SecondActivity.class);
-                              intent.putExtras(bundle);
-                              MainActivity.fragmentActivity.startActivity(intent);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("fragment", "main_fragment");
+                                Intent intent = new Intent(MainActivity.context, SecondActivity.class);
+                                intent.putExtras(bundle);
+                                MainActivity.fragmentActivity.startActivity(intent);
                             } else {
                                 Toast.makeText(context, "Sign Up UN Successfully", Toast.LENGTH_SHORT).show();
                                 $_Client.getSharedPreferences().removeObject("data_signup");
@@ -241,11 +241,11 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
                                 bundle.putString("data", finalJsonObject.toString());
                                 signup_fragment_tow.setArguments(bundle);
                                 fragmentTransaction.replace(R.id.container_main, signup_fragment_tow).commit();*/
-                               Intent intent = new Intent(MainActivity.context, SecondActivity.class);
-                               Bundle bundle = new Bundle();
-                               bundle.putString("fragment","signup_fragment_tow");
-                               intent.putExtras(bundle);
-                               MainActivity.fragmentActivity.startActivity(intent);
+                                Intent intent = new Intent(MainActivity.context, SecondActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("fragment", "signup_fragment_tow");
+                                intent.putExtras(bundle);
+                                MainActivity.fragmentActivity.startActivity(intent);
                             } else {
                                 Toast.makeText(context, "Sign Up UN Successfully", Toast.LENGTH_SHORT).show();
                                 $_Client.getSharedPreferences().removeObject("data_signup");
@@ -348,7 +348,7 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
                     } else {
                         System.out.println("B!!!!!!!!! = " + jsonObject);
 
-                        if(jsonObject.get("MType").equals("R")) {
+                        if (jsonObject.get("MType").equals("R")) {
                             System.out.println("A!!!!!!!!!");
                             DataInputStream dataInputStream = new DataInputStream($_Client.getSocketMessage().getInputStream());
                             byte[] bytes = new byte[Integer.parseInt((($_JSON_Message_Image) my_json).getBytes().toLowerCase())];
@@ -375,6 +375,45 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
                         //          }//
                         //     }
                     }
+                    break;
+                }
+
+                case "Change_Message_Successful": {
+                    my_json = new $_JSON_Change_Image_Successful("Change_Message_Successful", jsonObject.getString($_JSONAttributes.IdRecive.toString()), jsonObject.getBoolean($_JSONAttributes.Done.toString()),jsonObject.getString($_JSONAttributes.User_Name.toString()));
+                    $_JSON finalMy_json2 = my_json;
+
+                    System.out.println("AAAAAAccepted");
+                    SecondActivity.fragmentActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if ((($_JSON_Change_Image_Successful) finalMy_json2).isDone()) {
+                                Toast.makeText(SecondActivity.context, "Add Picture Successfully", Toast.LENGTH_SHORT).show();
+                                System.out.println("AAAAAAccepted");
+
+                             /*   JSONObject jsonObject1 = new JSONObject();
+                                try {
+                                    jsonObject1.put("Id", (($_JSON_SignUp_Tow_Successful) finalMy_json).getIdReceived());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                Bundle bundle = new Bundle();
+                                fragmentTransaction = SecondActivity.fragmentManager.beginTransaction();
+                                JSONObject jsonObject2 = new JSONObject();
+                                try {
+                                    finalJsonObject1.put($_JSONAttributes.Id.toString(), $_Client.getEmail());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                bundle.putString("data", finalJsonObject1.toString());
+                                main_fragment.setArguments(bundle);*/
+                                // main_fragment main_fragment = new main_fragment();
+                                //SecondActivity.fragmentManager.beginTransaction().replace(R.id.container_main_second, main_fragment).commit();
+                            } else {
+                                Toast.makeText(SecondActivity.context, "App Picture UN Successfully", Toast.LENGTH_SHORT).show();
+                                $_Client.getSharedPreferences().removeObject("data_signup");
+                            }
+                        }
+                    });
                     break;
                 }
 
@@ -553,8 +592,6 @@ public class MainActivity extends AppCompatActivity implements signup_fragment.O
         }
 
     }
-
-
 
 
     @Override

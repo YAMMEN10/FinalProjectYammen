@@ -115,7 +115,7 @@ public class $_Recycle_View_Room_Chat_Adapter extends RecyclerView.Adapter<Recyc
             // down sizing image as it throws OutOfMemory Exception for larger
             // images
 
-           Glide.with(SecondActivity.fragmentActivity)
+            Glide.with(SecondActivity.fragmentActivity)
                     .load(message_image.getBytes())
                     .asBitmap()
                     .into(recive_message_holders_image.getItem_send_room_chat_message_image().getMessage_send_image());

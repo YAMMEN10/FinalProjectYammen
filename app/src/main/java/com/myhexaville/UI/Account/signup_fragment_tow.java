@@ -18,9 +18,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.bumptech.glide.Glide;
 import com.myhexaville.Logic.Client.$_Client;
 import com.myhexaville.Logic.JSONData.$_JSONAttributes;
+import com.myhexaville.Logic.JSONData.$_JSON_Change_Image;
 import com.myhexaville.login.R;
+import com.myhexaville.login.SecondActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -142,11 +145,38 @@ public class signup_fragment_tow extends Fragment {
                 byte[] bytes = new byte[fileInputStream.available()];
                 fileInputStream.read(bytes);
 
-                my_image = Base64.encodeToString(bytes,Base64.DEFAULT);
-             imageView.setImageURI(uri);
+                $_JSON_Change_Image change_image = new $_JSON_Change_Image("Change_Image",$_Client.getEmail(),$_Client.getUserName(),bytes.length);
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put($_JSONAttributes.Id.toString(),change_image.getIdFrom());
+                jsonObject.put($_JSONAttributes.Type.toString(),change_image.getType());
+                jsonObject.put($_JSONAttributes.User_Name.toString(),change_image.getUser_name());
+                jsonObject.put($_JSONAttributes.Message.toString(),bytes.length);
+                $_Client.getDataOutputStreamMessage().writeUTF(jsonObject.toString());
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+
+                            $_Client.getDataOutputStreamMessage().write(bytes);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+                $_Client.getDataOutputStreamMessage().flush();
+
+
+                Glide.with(SecondActivity.fragmentActivity)
+                        .load(bytes)
+                        .asBitmap()
+                        .into(
+                                imageView
+                        );
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
