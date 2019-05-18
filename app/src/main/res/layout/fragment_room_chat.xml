@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.myhexaville.UI.Chat.MainFragment.RoomChat.room_chat"
+    android:id="@+id/root_view"
     android:layoutDirection="ltr"
     android:background="@color/white"
-    >
+    android:orientation="vertical"
+    tools:context="com.myhexaville.UI.Chat.MainFragment.RoomChat.room_chat">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:ignore="Suspicious0dp"
-        android:gravity="top">
+        android:gravity="top"
+        tools:ignore="Suspicious0dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycle_view_room_chat"
@@ -25,40 +25,44 @@
     </LinearLayout>
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
-        >
+        android:gravity="bottom">
 
         <ImageButton
             android:id="@+id/item_recycle_view_room_chat_studio"
             android:layout_width="0dp"
-            android:layout_weight="0.1"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/attachment"
-            />
+            android:layout_weight="0.1"
+            app:srcCompat="@drawable/attachment" />
 
-        <EditText
+        <ImageView
+            android:id="@+id/btn_emoji"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:padding="4dp"
+            app:srcCompat="@drawable/emoji" />
+
+        <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
             android:id="@+id/txt_message_input"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="0.8"
-            android:layout_height="wrap_content"
+            android:background="@drawable/bubble"
+            android:backgroundTint="@color/white"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:backgroundTint="@color/white"
-
-
             />
 
         <ImageButton
             android:id="@+id/txt_message_send"
             android:layout_width="0dp"
-            android:layout_weight="0.1"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/sendmessage"
-            />
+            android:layout_weight="0.1"
+            app:srcCompat="@drawable/sendmessage" />
 
 
     </LinearLayout>

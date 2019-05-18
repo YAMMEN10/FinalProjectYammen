@@ -13,13 +13,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+
 import com.myhexaville.Logic.Client.$_Client;
 import com.myhexaville.Logic.JSONData.$_JSONAttributes;
 import com.myhexaville.UI.$_Static_Class;
@@ -33,13 +35,14 @@ import com.myhexaville.login.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
+import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -68,9 +71,14 @@ public class room_chat extends Fragment {
     private RecyclerView recycle_view_room_chat;
     private ImageButton item_recycle_view_room_chat_studio;
     private ImageButton txt_message_send;
-    private EditText txt_message_input;
+    private static final String TAG = MainActivity.class.getSimpleName();
+    EmojIconActions emojIcon;
+    private ImageView btn_emoji;
+    private View rootView;
+    private EmojiconEditText txt_message_input;
     private $_Recycle_View_Room_Chat_Adapter recycle_view_room_chat_adapter;
     private List<$_Message> list;
+
 
 
     public room_chat() {
@@ -176,9 +184,30 @@ public class room_chat extends Fragment {
         recycle_view_room_chat.setHasFixedSize(true);
 
         item_recycle_view_room_chat_studio = view.findViewById(R.id.item_recycle_view_room_chat_studio);
-        txt_message_input = view.findViewById(R.id.txt_message_input);
         txt_message_send = view.findViewById(R.id.txt_message_send);
         item_recycle_view_room_chat_studio = view.findViewById(R.id.item_recycle_view_room_chat_studio);
+
+        //emoji
+        rootView = view.findViewById(R.id.root_view);
+        txt_message_input = view.findViewById(R.id.txt_message_input);
+        btn_emoji = view.findViewById(R.id.btn_emoji);
+
+        emojIcon = new EmojIconActions(getContext(), rootView, txt_message_input, btn_emoji);
+        emojIcon.ShowEmojIcon();
+        emojIcon.setIconsIds(R.drawable.ic_action_keyboard, R.drawable.smiley);
+        emojIcon.setKeyboardListener(new EmojIconActions.KeyboardListener() {
+            @Override
+            public void onKeyboardOpen() {
+                Log.e(TAG, "Keyboard opened!");
+            }
+
+            @Override
+            public void onKeyboardClose() {
+                Log.e(TAG, "Keyboard closed");
+            }
+        });
+
+
     }
 
 

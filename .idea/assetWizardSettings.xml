@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/E:/Android%20Studio%203.3/plugins/android/lib/android.jar!/images/material_design_icons/file/ic_attachment_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/E:/Android%20Studio%203.3/plugins/android/lib/android.jar!/images/material_design_icons/editor/ic_insert_emoticon_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="attachment" />
+                            <entry key="outputName" value="emoji" />
                             <entry key="sourceFile" value="C:\Users\USER" />
                           </map>
                         </option>
