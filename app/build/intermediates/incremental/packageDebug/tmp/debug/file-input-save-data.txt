@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Sat May 18 02:47:21 AST 2019
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\USER\\Desktop\\YAMMON_Andoid\\Android-Login-Screen-master\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.path=classes.dex
+0.set=DEX
+count=1
