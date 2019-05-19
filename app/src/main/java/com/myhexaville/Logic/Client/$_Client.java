@@ -1,8 +1,10 @@
 package com.myhexaville.Logic.Client;
 
 import android.content.Context;
+
 import com.myhexaville.Logic.ServerManagment.$_CheckOnline;
 import com.myhexaville.Logic.Tools.$_SharedPreferences;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -21,8 +23,8 @@ public class $_Client {
     private static String UserName = "Username";
 
     public $_Client(Context context) throws IOException {
-        socketOnline = new Socket("192.168.1.101", 5000);
-        socketMessage = new Socket("192.168.1.101", 5000);
+        socketOnline = new Socket("192.168.43.116", 5000);
+        socketMessage = new Socket("192.168.43.116", 5000);
         dataOutputStreamOnline = new DataOutputStream(socketOnline.getOutputStream());
         dataInputStreamOnline = new DataInputStream(socketOnline.getInputStream());
         dataOutputStreamMessage = new DataOutputStream(socketMessage.getOutputStream());
