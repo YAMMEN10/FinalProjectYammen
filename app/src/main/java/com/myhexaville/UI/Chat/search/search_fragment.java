@@ -16,13 +16,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+
 import com.myhexaville.Logic.Client.$_Client;
 import com.myhexaville.Logic.Friend.Friendship_sender;
 import com.myhexaville.Logic.JSONData.$_JSONAttributes;
 import com.myhexaville.Logic.JSONData.$_JSON_Search_User_Successful;
 import com.myhexaville.login.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -106,7 +109,9 @@ public class search_fragment extends Fragment implements    SearchView.OnQueryTe
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        MenuItem searchItem = null;
+        inflater.inflate((R.menu.menu_fragment_search), menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+/*
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
     
     @Override
@@ -117,11 +122,11 @@ public class search_fragment extends Fragment implements    SearchView.OnQueryTe
 
     @Override
     public boolean onMenuItemActionCollapse(MenuItem item) {
-      //  FragmentTransaction fragmentTransaction = MainActivity.fragmentManager.beginTransaction();
-     //   fragmentTransaction.replace(R.id.continer_main,MainActivity.fragment_main).commit();
+        FragmentTransaction fragmentTransaction = SecondActivity.fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_main_second,SecondActivity.main_fragment).commit();
         return true;
     }
-});
+});*/
         searchItem.expandActionView();
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setQueryHint("Search");
@@ -201,7 +206,7 @@ public class search_fragment extends Fragment implements    SearchView.OnQueryTe
             jsonObject.put($_JSONAttributes.Type.toString(), "Search_Of_User");
             jsonObject.put($_JSONAttributes.Id.toString(), $_Client.getEmail());
             jsonObject.put($_JSONAttributes.Search_User.toString(),query);
-            $_Client.getDataOutputStreamOnline().writeUTF(jsonObject.toString());
+            $_Client.getDataOutputStreamMessage().writeUTF(jsonObject.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -222,9 +227,9 @@ public class search_fragment extends Fragment implements    SearchView.OnQueryTe
             }
         }
         mAdapter=new User_Adapter(getActivity(),user_info_searches);
-        mListView = (ListView)getActivity(). findViewById(R.id.list);
+        mListView = getActivity().findViewById(R.id.list);
         mListView.setAdapter(mAdapter);
-        TextView mEmptyView = (TextView) getActivity().findViewById(R.id.emptyView);
+        TextView mEmptyView = getActivity().findViewById(R.id.emptyView);
         mListView.setEmptyView(mEmptyView);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -252,7 +257,7 @@ public void Edit_button(String id,String text)
             jsonObject.put($_JSONAttributes.Add_Friend_Id.toString(),id);
             jsonObject.put($_JSONAttributes.User_Name.toString(),"abod");
 
-            $_Client.getDataOutputStreamOnline().writeUTF(jsonObject.toString());
+            $_Client.getDataOutputStreamMessage().writeUTF(jsonObject.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -272,7 +277,7 @@ public void Edit_button(String id,String text)
             jsonObject.put($_JSONAttributes.Add_Friend_Id.toString(),id);
             jsonObject.put($_JSONAttributes.User_Name.toString(),"abod");
 
-            $_Client.getDataOutputStreamOnline().writeUTF(jsonObject.toString());
+            $_Client.getDataOutputStreamMessage().writeUTF(jsonObject.toString());
 
         } catch (JSONException e) {
             e.printStackTrace();

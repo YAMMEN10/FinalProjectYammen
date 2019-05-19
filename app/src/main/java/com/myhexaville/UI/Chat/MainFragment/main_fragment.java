@@ -1,10 +1,10 @@
 package com.myhexaville.UI.Chat.MainFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -13,10 +13,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.myhexaville.UI.Adapter.AdapterPageViewer.$_Page_Adapter;
-import com.myhexaville.UI.Chat.search.search_fragment;
-import com.myhexaville.login.MainActivity;
 import com.myhexaville.login.R;
+import com.myhexaville.login.ThirdActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -106,6 +106,7 @@ public class main_fragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -117,12 +118,18 @@ public class main_fragment extends Fragment {
         if (id == R.id.action_settings) {
             return true;
         }
-        if(id==R.id.action_search_open)
-        {
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            search_fragment search_fragment=new search_fragment();
-            MainActivity.fragment_search=search_fragment;
-            fragmentTransaction.replace(R.id.container_main,search_fragment).commit();
+        if (id == R.id.action_search_open) {
+          /*  FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            search_fragment search_fragment = new search_fragment();
+            MainActivity.fragment_search = search_fragment;
+            fragmentTransaction.add(R.id.container_main_second, search_fragment).addToBackStack(null).hide(search_fragment).show(search_fragment).commit();
+            //fragmentTransaction.add(R.id.container_main_second, search_fragment).addToBackStack(null).hide(search_fragment).addToBackStack(null).commit();
+*/
+            Bundle bundle = new Bundle();
+            bundle.putString("fragment", "search_fragment");
+            Intent intent = new Intent(getContext(), ThirdActivity.class);
+            intent.putExtras(bundle);
+            getActivity().startActivity(intent);
         }
 
 

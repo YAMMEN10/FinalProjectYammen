@@ -10,6 +10,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.myhexaville.UI.Adapter.AdapterMainChat.$_Recycle_View_Main_Chat_Adapter;
 import com.myhexaville.UI.Adapter.AdapterMainChat.$_Value_Item_Main_Chat;
 import com.myhexaville.UI.Chat.MainFragment.RoomChat.RecyclerItemClickListener;
@@ -44,7 +45,7 @@ public class main_chat_fragment extends Fragment {
 
     //Attribute
     RecyclerView recycle_view_main_chat;
-    $_Recycle_View_Main_Chat_Adapter recycleAdapter;
+    public static $_Recycle_View_Main_Chat_Adapter recycleAdapter;
     public static List<Pair<$_Value_Item_Main_Chat, room_chat>> rooms;
 
     public main_chat_fragment() {
@@ -83,6 +84,7 @@ public class main_chat_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_main_chat_fragment, container, false);
@@ -94,7 +96,7 @@ public class main_chat_fragment extends Fragment {
 
         rooms.add(new Pair<$_Value_Item_Main_Chat, room_chat>(value_item_main_chat, room_chat));
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.container_main_second, room_chat).addToBackStack(null).hide(room_chat).commit();
+        fragmentTransaction.add(R.id.container_main_second, room_chat).addToBackStack(null).hide(room_chat).addToBackStack(null).commit();
 
         int size = MainActivity.messages.size();
         for (int i = 0; i < size; i++) {

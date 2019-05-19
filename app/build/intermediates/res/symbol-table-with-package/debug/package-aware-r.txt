@@ -2547,7 +2547,6 @@ id btn_emoji
 id btn_signup
 id button
 id buttonPanel
-id button_notifiction
 id cancel_action
 id center
 id center_horizontal
@@ -2563,6 +2562,7 @@ id collapseActionView
 id container
 id container_main
 id container_main_second
+id container_main_third
 id content
 id contentPanel
 id coordinator
@@ -2742,6 +2742,7 @@ id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
+id textView
 id textWatcher
 id text_input_password_toggle
 id textinput_counter
@@ -2839,6 +2840,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
 layout activity_second
+layout activity_third
 layout cart_list_item
 layout content_main
 layout content_main_search

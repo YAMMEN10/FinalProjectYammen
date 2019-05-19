@@ -1,13 +1,15 @@
 package com.myhexaville.UI.Notification;
+
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.myhexaville.login.R;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, description;
         public ImageView thumbnail;
-        public RelativeLayout viewBackground, viewForeground;
+        public ConstraintLayout viewBackground, viewForeground;
         public Button button;
 
         public MyViewHolder(View view) {
@@ -30,7 +32,6 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.MyView
             thumbnail = view.findViewById(R.id.thumbnail);
             viewBackground = view.findViewById(R.id.view_background);
             viewForeground = view.findViewById(R.id.view_foreground);
-            button=view.findViewById(R.id.button_notifiction);
         }
     }
 

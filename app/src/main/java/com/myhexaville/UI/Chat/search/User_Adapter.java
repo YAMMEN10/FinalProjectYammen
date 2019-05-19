@@ -10,8 +10,8 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.myhexaville.login.MainActivity;
 import com.myhexaville.login.R;
+import com.myhexaville.login.ThirdActivity;
 
 import java.util.ArrayList;
 
@@ -54,11 +54,11 @@ public class User_Adapter extends ArrayAdapter<User_Info_Search> implements Filt
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_view, parent, false);
         }
         // Lookup view for data population
-        TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        TextView tvHome = (TextView) convertView.findViewById(R.id.tvHome);
-        ImageView imageView=(ImageView)convertView.findViewById(R.id.imUser);
-        Button Add_button=(Button) convertView.findViewById(R.id.Add_friend) ;
-        Button Add_button2=(Button) convertView.findViewById(R.id.Add_friend2) ;
+        TextView tvName = convertView.findViewById(R.id.tvName);
+        TextView tvHome = convertView.findViewById(R.id.tvHome);
+        ImageView imageView = convertView.findViewById(R.id.imUser);
+        Button Add_button = convertView.findViewById(R.id.Add_friend);
+        Button Add_button2 = convertView.findViewById(R.id.Add_friend2);
 
         // Populate the data into the template view using the data object
         tvName.setText( user.getmTitle());
@@ -74,13 +74,13 @@ public class User_Adapter extends ArrayAdapter<User_Info_Search> implements Filt
         Add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.fragment_search.set_action(user.getButton_text(),user.getId());
+                ThirdActivity.search_fragment.set_action(user.getButton_text(), user.getId());
             }
         });
         Add_button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.fragment_search.set_action("Accept",user.getId());
+                ThirdActivity.search_fragment.set_action("Accept", user.getId());
 
             }
         });

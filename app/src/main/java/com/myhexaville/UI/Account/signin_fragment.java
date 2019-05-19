@@ -1,4 +1,5 @@
 package com.myhexaville.UI.Account;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.myhexaville.login.login.OnLoginListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 
 
@@ -181,8 +183,10 @@ public class signin_fragment extends Fragment implements OnLoginListener {
             jsonObject.put($_JSONAttributes.Id.toString(), txt_email_signin.getText().toString());
             jsonObject.put($_JSONAttributes.Password.toString(), txt_password_signin.getText().toString());
             $_Client.getDataOutputStreamMessage().writeUTF(jsonObject.toString());
-            if (check_remember_me_signin.isChecked())
+            if (check_remember_me_signin.isChecked()) {
                 $_Client.getSharedPreferences().storeObject("data_signup", jsonObject.toString());
+                System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+            }
             $_Client.setEmail(txt_email_signin.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
